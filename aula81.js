@@ -211,4 +211,5 @@ const numerosOrganizados = arrayDeNumeros
     .filter((e) => e % 2 === 0)
     .map((e) => e * 2)
     .reduce((acumulador, valorAtual) => acumulador += valorAtual);
+
 console.log(numerosOrganizados);
