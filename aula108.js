@@ -1,4 +1,4 @@
-function esperaAi(mensagem, tempo) {
+function simulaUmaChamadaComTempoAleatorio(mensagem, tempo) {
     return new Promise((resolve, reject) => {
 
         setTimeout(() => {
@@ -21,18 +21,18 @@ function tempoAleatorio(min, max) {
 
 
 // ====================================================================
-esperaAi('Frase... 1', tempoAleatorio(1, 3))
+simulaUmaChamadaComTempoAleatorio('Frase... 1', tempoAleatorio(1, 3))
     .then(resposta => {
         console.log(resposta); // este print é da chamada anterior
-        return esperaAi('Frase... 2', tempoAleatorio(1, 2));
+        return simulaUmaChamadaComTempoAleatorio('Frase... 2', tempoAleatorio(1, 2));
     })
     .then(resposta => {
         console.log(resposta); // este print é da chamada anterior
-        return esperaAi('Frase... 3', tempoAleatorio(1, 2));
+        return simulaUmaChamadaComTempoAleatorio('Frase... 3', tempoAleatorio(1, 2));
     })
     .then(resposta => {
         console.log(resposta); // este print é da chamada anterior
-        return esperaAi(Number(123), tempoAleatorio(1, 2));
+        return simulaUmaChamadaComTempoAleatorio(Number(123), tempoAleatorio(1, 2));
     })
     .then(resposta => {
         console.log(resposta); // este print é da chamada anterior
@@ -44,11 +44,11 @@ esperaAi('Frase... 1', tempoAleatorio(1, 3))
 // ====================================================================
 // Promise.all Promise.race Promise.resolve Promise.reject
 const promises = [
-    esperaAi('Promise 1 ...', tempoAleatorio(1, 10)),
-    esperaAi('Promise 2 ...', tempoAleatorio(1, 10)),
-    esperaAi(1000, tempoAleatorio(1, 10)),
-    esperaAi('Promise 3 ...', tempoAleatorio(1, 10)),
-    esperaAi(123456, tempoAleatorio(1, 10)),
+    simulaUmaChamadaComTempoAleatorio('Promise 1 ...', tempoAleatorio(1, 10)),
+    simulaUmaChamadaComTempoAleatorio('Promise 2 ...', tempoAleatorio(1, 10)),
+    simulaUmaChamadaComTempoAleatorio(1000, tempoAleatorio(1, 10)),
+    simulaUmaChamadaComTempoAleatorio('Promise 3 ...', tempoAleatorio(1, 10)),
+    simulaUmaChamadaComTempoAleatorio(123456, tempoAleatorio(1, 10)),
 ];
 
 // Promise.all => Resolve todas as promises
@@ -75,9 +75,9 @@ Promise.race(promises)
 // Promise.resolve - Exemplo de caso de Cache... se já temos determinado dado em cache podemos devolvê-lo
 
 const paginasParaEntregar = [
-    esperaAi('Carregando dados...', tempoAleatorio(1, 2)),
-    esperaAi('Montando a página...', tempoAleatorio(1, 10)),
-    esperaAi('A página foi entregue, pegue ela aqui.', tempoAleatorio(4, 7)),
+    simulaUmaChamadaComTempoAleatorio('Carregando dados...', tempoAleatorio(1, 2)),
+    simulaUmaChamadaComTempoAleatorio('Montando a página...', tempoAleatorio(1, 10)),
+    simulaUmaChamadaComTempoAleatorio('A página foi entregue, pegue ela aqui.', tempoAleatorio(4, 7)),
 ];
 
 function baixaUmaPagina(flag) {
