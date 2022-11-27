@@ -1,13 +1,14 @@
 function esperaAi(mensagem, tempo) {
     return new Promise((resolve, reject) => {
 
-        if (typeof mensagem !== 'string') {
-            reject('Bad value.');
-        }
-
         setTimeout(() => {
-            // console.log(mensagem);
-            resolve(mensagem);
+
+            if (typeof mensagem !== 'string') {
+                reject(`Valor que foi passado é ${mensagem} do formato "${typeof mensagem}" e não é aceito. `);
+                return;
+            }
+
+            resolve(mensagem.toUpperCase() + ' - passei na promise.');
         }, tempo);
     });
 }
@@ -18,6 +19,8 @@ function tempoAleatorio(min, max) {
     return Math.floor(Math.random() * (max - min) + min);
 }
 
+
+// ====================================================================
 esperaAi('Frase... 1', tempoAleatorio(1, 3))
     .then(resposta => {
         console.log(resposta); // este print é da chamada anterior
@@ -35,5 +38,80 @@ esperaAi('Frase... 1', tempoAleatorio(1, 3))
         console.log(resposta); // este print é da chamada anterior
     })
     .catch(erro => {
-        console.log('errou:', erro);
+        console.log('Catch da corrente com 4 funções:', erro);
     });
+
+// ====================================================================
+// Promise.all Promise.race Promise.resolve Promise.reject
+const promises = [
+    esperaAi('Promise 1 ...', tempoAleatorio(1, 10)),
+    esperaAi('Promise 2 ...', tempoAleatorio(1, 10)),
+    esperaAi(1000, tempoAleatorio(1, 10)),
+    esperaAi('Promise 3 ...', tempoAleatorio(1, 10)),
+    esperaAi(123456, tempoAleatorio(1, 10)),
+];
+
+// Promise.all => Resolve todas as promises
+Promise.all(promises)
+    .then(valor => {
+        console.log(valor)
+    })
+    .catch(erro => {
+        console.log(`Catch do Promise.all(): ${erro}`);
+    });
+
+
+// Promise.race => Tenta resolver todas as promises mas entrega a primeira que for resolvida
+
+Promise.race(promises)
+    .then(resposta => {
+        console.log(resposta);
+    })
+    .catch(erro => {
+        console.log(`Catch do Promise.race() ${erro}`);
+    })
+
+// ====================================================================
+// Promise.resolve - Exemplo de caso de Cache... se já temos determinado dado em cache podemos devolvê-lo
+
+const paginasParaEntregar = [
+    esperaAi('Carregando dados...', tempoAleatorio(1, 2)),
+    esperaAi('Montando a página...', tempoAleatorio(1, 10)),
+    esperaAi('A página foi entregue, pegue ela aqui.', tempoAleatorio(4, 7)),
+];
+
+function baixaUmaPagina(flag) {
+    const estaCacheada = flag;
+
+    if (estaCacheada) {
+        return Promise.resolve('A página já está no cache, pegue ela aqui.');
+    } else {
+        return Promise.all(paginasParaEntregar)
+            .then(dadosRecebidos => {
+                console.log(dadosRecebidos);
+            })
+            .catch(erro => {
+                console.log('Ops, não consegui carregar a página.');
+            });
+    }
+}
+
+baixaUmaPagina(false)
+    .then(dadosDaPagina => console.log(dadosDaPagina))
+    .catch(erro => console.log(erro));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
