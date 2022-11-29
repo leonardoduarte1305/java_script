@@ -1,0 +1,38 @@
+console.log("Descobrindo os tipos");
+
+let variavel = 10;
+const constante = "valor";
+
+console.log(typeof variavel);
+console.log(typeof constante);
+
+console.log("=======================================");
+
+const nome = 'Leopoldo';
+const sobrenome = 'Jardim';
+const idade = 33;
+const peso = 85.4;
+const alturaEmM = 1.85;
+let indiceMassaCorporal = peso/(alturaEmM * alturaEmM);
+
+console.log(nome, sobrenome, 'tem', idade, 'anos, pesa', peso, 'Kg, tem', alturaEmM, 'de altura e seu IMC é de', indiceMassaCorporal + '.')
+console.log("=======================================");
+
+//var é diferente de let
+// ** potenciação
+
+//NaN = Not a Number
+const number2 = 10;
+const number3 = '10';
+const number4 = parseInt('10');
+const number5 = parseFloat('10.2');
+const number6 = Number('10.53');
+
+console.log(number2, typeof number2);
+console.log(number3, typeof number3);
+
+console.log(number4, typeof number4);
+console.log(number5, typeof number5);
+console.log(number6, typeof number6);
+
+console.log("=======================================");
