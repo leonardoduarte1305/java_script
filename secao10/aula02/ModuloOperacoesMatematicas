@@ -1,0 +1,4 @@
+exports.funcaoSomar = (parcelaA, parcelaB) => parcelaA + parcelaB;
+exports.funcaoDiminuir = (minuendo, subtraendo) => minuendo - subtraendo;
+exports.funcaoMultiplicar = (fatorA, fatorB) => fatorA * fatorB;
+exports.funcaoDividir = (dividendo, divisor) => dividendo / divisor;
